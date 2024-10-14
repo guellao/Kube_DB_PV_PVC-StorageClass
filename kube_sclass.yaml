@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc               # Name of the StorageClass
+provisioner: kubernetes.io/aws-ebs   # The AWS EBS provisioner
+parameters:
+  type: gp2                  # EBS volume type (gp2 is General Purpose SSD)
+  fsType: ext4               # Filesystem type to format the volume
+  zones: us-east-1a          # Specify the availability zone (optional)
+reclaimPolicy: Retain         # What happens to the volume when the PVC is deleted (Retain/Delete)
+volumeBindingMode: WaitForFirstConsumer # Wait until a pod is scheduled to provision the volume
+
